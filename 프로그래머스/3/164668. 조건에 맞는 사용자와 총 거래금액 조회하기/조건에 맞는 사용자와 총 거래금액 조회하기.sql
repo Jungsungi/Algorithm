@@ -1,0 +1,19 @@
+-- 코드를 입력하세요
+SELECT
+    USER_ID,
+    NICKNAME,
+    TOTAL_SALES
+FROM
+    (
+        SELECT
+            WRITER_ID, SUM(PRICE) AS TOTAL_SALES
+        FROM 
+            USED_GOODS_BOARD
+        WHERE
+            STATUS = 'DONE'
+        GROUP BY WRITER_ID
+    ) A,
+    USED_GOODS_USER B
+WHERE A.WRITER_ID = B.USER_ID
+    AND TOTAL_SALES >= 700000
+ORDER BY TOTAL_SALES
