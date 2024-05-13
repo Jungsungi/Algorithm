@@ -1,0 +1,18 @@
+-- 코드를 입력하세요
+SELECT 
+    FLAVOR
+FROM
+    (SELECT
+        B.FLAVOR, A.TOTAL_ORDER + B.TOTAL_ORDER AS COUNT
+    FROM
+        FIRST_HALF A,
+        (SELECT
+            FLAVOR, SUM(TOTAL_ORDER) AS TOTAL_ORDER
+        FROM
+            JULY
+        GROUP BY FLAVOR) B
+    WHERE
+        A.FLAVOR = B.FLAVOR
+    ORDER BY COUNT DESC)
+WHERE ROWNUM <= 3;
+
