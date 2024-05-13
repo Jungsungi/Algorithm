@@ -1,0 +1,18 @@
+-- 코드를 입력하세요
+SELECT
+    NAME, DATETIME
+FROM
+    (SELECT
+        A.NAME, A.DATETIME
+    FROM
+        ANIMAL_INS A,
+        ANIMAL_OUTS B
+    WHERE
+        A.ANIMAL_ID = B.ANIMAL_ID(+)
+        AND B.NAME IS NULL
+        AND A.NAME IS NOT NULL
+    ORDER BY A.DATETIME)
+WHERE ROWNUM <= 3;
+
+    
+    
